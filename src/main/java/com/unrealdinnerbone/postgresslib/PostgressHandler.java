@@ -1,4 +1,4 @@
-package com.unrealdinnerbone.twitchlogger;
+package com.unrealdinnerbone.postgresslib;
 
 import com.unrealdinnerbone.unreallib.ExceptionConsumer;
 import com.unrealdinnerbone.unreallib.LoopUtils;
