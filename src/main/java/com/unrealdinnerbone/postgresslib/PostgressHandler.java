@@ -1,7 +1,6 @@
 package com.unrealdinnerbone.postgresslib;
 
 import com.unrealdinnerbone.unreallib.ExceptionConsumer;
-import com.unrealdinnerbone.unreallib.LoopUtils;
 import com.unrealdinnerbone.unreallib.StringUtils;
 import com.unrealdinnerbone.unreallib.TaskScheduler;
 import lombok.extern.slf4j.Slf4j;
@@ -36,14 +35,10 @@ public class PostgressHandler {
             try {
                 completableFuture.complete(postgres.createStatement().executeQuery(quarry));
             }catch (SQLException e) {
-                e.printStackTrace();
+                completableFuture.completeExceptionally(e);
             }
 
         });
         return completableFuture;
-    }
-
-    public CompletableFuture<ResultSet> getSets(String quarry, ExceptionConsumer<ResultSet, SQLException> resultSetExceptionSuppler) {
-        return getSet(quarry).whenComplete((resultSet, throwable) -> LoopUtils.loop(resultSet::next, () -> resultSetExceptionSuppler.accept(resultSet)));
     }
 }
