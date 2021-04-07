@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.sql.*;
 import java.util.concurrent.CompletableFuture;
 
-@Slf4j
 public class PostgressHandler {
 
     private final Connection postgres;
@@ -25,7 +24,8 @@ public class PostgressHandler {
             preparedStatementConsumer.accept(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            log.error("There was an error while executing update", e);
+            e.printStackTrace();
+//            log.error("There was an error while executing update", e);
         }
     }
 

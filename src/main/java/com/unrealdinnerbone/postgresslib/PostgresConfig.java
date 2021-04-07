@@ -3,7 +3,6 @@ package com.unrealdinnerbone.postgresslib;
 import com.unrealdinnerbone.config.api.IConfig;
 import lombok.Getter;
 
-@Getter
 public class PostgresConfig implements IConfig {
 
     private String host;
@@ -20,5 +19,25 @@ public class PostgresConfig implements IConfig {
     @Override
     public String getFolderName() {
         return "config";
+    }
+
+    public String getDb() {
+        return db;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }
