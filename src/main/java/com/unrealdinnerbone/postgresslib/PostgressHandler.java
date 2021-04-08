@@ -43,21 +43,8 @@ public class PostgressHandler {
             throwables.printStackTrace();
         }
     }
-
-    public CompletableFuture<ResultSet> getSet(String quarry) {
-        CompletableFuture<ResultSet> completableFuture = new CompletableFuture<>();
-        TaskScheduler.handleTaskOnThread(() -> {
-            try {
-                completableFuture.complete(postgres.createStatement().executeQuery(quarry));
-            }catch (SQLException e) {
-                completableFuture.completeExceptionally(e);
-            }
-
-        });
-        return completableFuture;
-    }
-
-    public void get(String quarry) throws SQLException {
+    
+    public void getSet(String quarry) throws SQLException {
         postgres.createStatement().executeQuery(quarry);
     }
 }
