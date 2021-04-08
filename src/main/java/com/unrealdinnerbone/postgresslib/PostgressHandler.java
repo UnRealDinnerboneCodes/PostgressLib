@@ -56,4 +56,8 @@ public class PostgressHandler {
         });
         return completableFuture;
     }
+
+    public void get(String quarry) throws SQLException {
+        postgres.createStatement().executeQuery(quarry);
+    }
 }
