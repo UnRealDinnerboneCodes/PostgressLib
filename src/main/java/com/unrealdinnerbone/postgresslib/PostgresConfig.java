@@ -1,7 +1,6 @@
 package com.unrealdinnerbone.postgresslib;
 
 import com.unrealdinnerbone.config.api.IConfig;
-import lombok.Getter;
 
 public class PostgresConfig implements IConfig {
 
