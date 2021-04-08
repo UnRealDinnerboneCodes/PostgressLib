@@ -31,10 +31,10 @@ public class PostgressHandler {
         }
     }
 
-    public void executeBatchUpdate(String quarry, List<Consumer<PreparedStatement>> statemetns) {
+    public void executeBatchUpdate(String quarry, List<ExceptionConsumer<PreparedStatement, SQLException>> statemetns) {
         try {
             PreparedStatement preparedStatement = postgres.prepareStatement(quarry);
-            for(Consumer<PreparedStatement> statemetn : statemetns) {
+            for(ExceptionConsumer<PreparedStatement, SQLException> statemetn : statemetns) {
                 statemetn.accept(preparedStatement);
                 preparedStatement.addBatch();
             }
@@ -46,5 +46,10 @@ public class PostgressHandler {
 
     public ResultSet getSet(String quarry) throws SQLException {
         return postgres.createStatement().executeQuery(quarry);
+    }
+
+
+    public static record SneakStatement(PreparedStatement preparedStatement) {
+
     }
 }
