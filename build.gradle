@@ -50,10 +50,10 @@ configurations {
 
 dependencies {
 
-    shade 'com.unrealdinnerbone:UnRealConfig:2.0.0+build.18'
-    shade 'com.unrealdinnerbone:UnRealLib:1.1.0+build.35'
+    shade 'com.unrealdinnerbone:UnRealConfig:3.0.0+build.24'
+    shade 'com.unrealdinnerbone:UnRealLib:2.1.0+build.44'
 
-    shade 'org.postgresql:postgresql:42.2.12'
+    shade 'org.postgresql:postgresql:42.2.19'
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 
