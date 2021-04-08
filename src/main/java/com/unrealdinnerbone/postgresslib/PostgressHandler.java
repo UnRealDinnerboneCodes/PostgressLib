@@ -5,7 +5,10 @@ import com.unrealdinnerbone.unreallib.StringUtils;
 import com.unrealdinnerbone.unreallib.TaskScheduler;
 
 import java.sql.*;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class PostgressHandler {
 
@@ -25,6 +28,19 @@ public class PostgressHandler {
         } catch (SQLException e) {
             e.printStackTrace();
 //            log.error("There was an error while executing update", e);
+        }
+    }
+
+    public void executeBatchUpdate(String quarry, List<Consumer<PreparedStatement>> statemetns) {
+        try {
+            PreparedStatement preparedStatement = postgres.prepareStatement(quarry);
+            for(Consumer<PreparedStatement> statemetn : statemetns) {
+                statemetn.accept(preparedStatement);
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+        } catch(SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
