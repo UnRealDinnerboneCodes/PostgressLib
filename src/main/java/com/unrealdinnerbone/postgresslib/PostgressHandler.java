@@ -3,7 +3,6 @@ package com.unrealdinnerbone.postgresslib;
 import com.unrealdinnerbone.unreallib.ExceptionConsumer;
 import com.unrealdinnerbone.unreallib.StringUtils;
 import com.unrealdinnerbone.unreallib.TaskScheduler;
-import lombok.extern.slf4j.Slf4j;
 
 import java.sql.*;
 import java.util.concurrent.CompletableFuture;
