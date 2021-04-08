@@ -43,8 +43,8 @@ public class PostgressHandler {
             throwables.printStackTrace();
         }
     }
-    
-    public void getSet(String quarry) throws SQLException {
-        postgres.createStatement().executeQuery(quarry);
+
+    public ResultSet getSet(String quarry) throws SQLException {
+        return postgres.createStatement().executeQuery(quarry);
     }
 }
