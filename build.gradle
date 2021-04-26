@@ -1,18 +1,12 @@
 buildscript {
     repositories {
-        maven {
-            name 'Shadow'
-            url 'https://dl.bintray.com/content/johnrengelman/gradle-plugins'
-        }
         mavenCentral()
-        mavenLocal()
     }
 }
 
 
 plugins {
     id "maven-publish"
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'java'
 }
 
@@ -30,43 +24,28 @@ archivesBaseName = "PostgressLib"
 
 repositories {
     mavenCentral()
-    jcenter()
-    maven {
-        name = "The Name"
-        url = "https://jitpack.io"
-    }
     maven {
         url = "https://maven.unreal.codes/repository/unreal/"
         name = "UnReal Maven"
     }
-    maven { url "https://oss.jfrog.org/artifactory/libs-release"}
 }
 
 configurations {
-    shade
-    compile.extendsFrom shade
-    shadow.extendsFrom shade
+    api
+    implementation.extendsFrom api
+    apiElements.extendsFrom api
 }
 
 dependencies {
 
-    shade 'com.unrealdinnerbone:UnRealConfig:3.0.0+build.24:core'
-    shade 'com.unrealdinnerbone:UnRealConfig:3.0.0+build.24:api'
-    shade 'com.unrealdinnerbone:UnRealLib:2.1.0+build.44'
+    api 'com.unrealdinnerbone:UnRealConfig:3.0.0+build.25'
+    api 'com.unrealdinnerbone:UnRealLib:2.1.0+build.45'
 
-    shade 'org.postgresql:postgresql:42.2.19'
+    api 'org.postgresql:postgresql:42.2.19'
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 
 }
-
-shadowJar {
-    manifest {
-        inheritFrom project.tasks.jar.manifest
-    }
-    configurations = [project.configurations.shade]
-}
-
 
 publishing {
     publications {

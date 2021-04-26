@@ -2,16 +2,15 @@ package com.unrealdinnerbone.postgresslib;
 
 import com.unrealdinnerbone.unreallib.ExceptionConsumer;
 import com.unrealdinnerbone.unreallib.StringUtils;
-import com.unrealdinnerbone.unreallib.TaskScheduler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 
 public class PostgressHandler {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostgressHandler.class);
     private final Connection postgres;
 
     public PostgressHandler(PostgresConfig postgresConfig) throws SQLException, ClassNotFoundException {
@@ -26,8 +25,7 @@ public class PostgressHandler {
             preparedStatementConsumer.accept(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-//            log.error("There was an error while executing update", e);
+            LOGGER.error("Error while updating", e);
         }
     }
 
@@ -40,16 +38,11 @@ public class PostgressHandler {
             }
             preparedStatement.executeBatch();
         } catch(SQLException throwables) {
-            throwables.printStackTrace();
+            LOGGER.error("Error while updating batch", throwables);
         }
     }
 
     public ResultSet getSet(String quarry) throws SQLException {
         return postgres.createStatement().executeQuery(quarry);
-    }
-
-
-    public static record SneakStatement(PreparedStatement preparedStatement) {
-
     }
 }
