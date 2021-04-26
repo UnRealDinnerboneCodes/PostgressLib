@@ -1,7 +1,7 @@
 package com.unrealdinnerbone.postgresslib;
 
-import com.unrealdinnerbone.unreallib.ExceptionConsumer;
 import com.unrealdinnerbone.unreallib.StringUtils;
+import com.unrealdinnerbone.unreallib.exception.ExceptionConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
