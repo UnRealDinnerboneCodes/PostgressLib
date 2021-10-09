@@ -45,4 +45,15 @@ public class PostgressHandler {
     public ResultSet getSet(String quarry) throws SQLException {
         return postgres.createStatement().executeQuery(quarry);
     }
+
+    public ResultSet getSet(String quarry, ExceptionConsumer<PreparedStatement, SQLException> preparedStatementConsumer) {
+        try {
+            PreparedStatement preparedStatement = postgres.prepareStatement(quarry);
+            preparedStatementConsumer.accept(preparedStatement);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            LOGGER.error("Error while updating", e);
+            return null;
+        }
+    }
 }
