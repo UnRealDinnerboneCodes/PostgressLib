@@ -1,5 +1,6 @@
 package com.unrealdinnerbone.postgresslib;
 
+
 import com.unrealdinnerbone.config.api.IConfig;
 
 public class PostgresConfig implements IConfig {
