@@ -14,11 +14,11 @@ public class PostgresConfig {
 
 
     public PostgresConfig(IConfigCreator creator) {
-        this.host = creator.createString("POSTGRES_HOST", "localhost");
-        this.port = creator.createInteger("POSTGRES_PORT", 5432);
-        this.db = creator.createString("POSTGRES_DATABASE",null);
-        this.username = creator.createString("POSTGRES_USERNAME", null);
-        this.password = creator.createString("POSTGRES_PASSWORD", null);
+        this.host = creator.createString("host", "localhost");
+        this.port = creator.createInteger("port", 5432);
+        this.db = creator.createString("database",null);
+        this.username = creator.createString("username", null);
+        this.password = creator.createString("password", null);
     }
 
     public IntegerConfig getPort() {
