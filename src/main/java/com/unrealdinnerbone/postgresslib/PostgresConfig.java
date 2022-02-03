@@ -1,43 +1,43 @@
 package com.unrealdinnerbone.postgresslib;
 
+import com.unrealdinnerbone.config.IConfigCreator;
+import com.unrealdinnerbone.config.config.IntegerConfig;
+import com.unrealdinnerbone.config.config.StringConfig;
 
-import com.unrealdinnerbone.config.api.IConfig;
+public class PostgresConfig {
 
-public class PostgresConfig implements IConfig {
+    private StringConfig host;
+    private IntegerConfig port;
+    private StringConfig db;
+    private StringConfig username;
+    private StringConfig password;
 
-    private String host;
-    private String port;
-    private String db;
-    private String username;
-    private String password;
 
-    @Override
-    public String getName() {
-        return "postgres";
+    public PostgresConfig(IConfigCreator creator) {
+        this.host = creator.createString("POSTGRES_HOST", "localhost");
+        this.port = creator.createInteger("POSTGRES_PORT", 5432);
+        this.db = creator.createString("POSTGRES_DATABASE",null);
+        this.username = creator.createString("POSTGRES_USERNAME", null);
+        this.password = creator.createString("POSTGRES_PASSWORD", null);
     }
 
-    @Override
-    public String getFolderName() {
-        return "config";
-    }
-
-    public String getDb() {
-        return db;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getPort() {
+    public IntegerConfig getPort() {
         return port;
     }
 
-    public String getUsername() {
+    public StringConfig getDb() {
+        return db;
+    }
+
+    public StringConfig getHost() {
+        return host;
+    }
+
+    public StringConfig getPassword() {
+        return password;
+    }
+
+    public StringConfig getUsername() {
         return username;
     }
 }
