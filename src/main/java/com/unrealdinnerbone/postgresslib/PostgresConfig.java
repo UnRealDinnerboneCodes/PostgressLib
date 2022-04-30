@@ -6,19 +6,19 @@ import com.unrealdinnerbone.config.config.StringConfig;
 
 public class PostgresConfig {
 
-    private StringConfig host;
-    private IntegerConfig port;
-    private StringConfig db;
-    private StringConfig username;
-    private StringConfig password;
+    private final StringConfig host;
+    private final IntegerConfig port;
+    private final StringConfig db;
+    private final StringConfig username;
+    private final StringConfig password;
 
 
     public PostgresConfig(IConfigCreator creator) {
-        this.host = creator.createString("host", "localhost");
+        this.host = creator.createString("host", "");
         this.port = creator.createInteger("port", 5432);
-        this.db = creator.createString("database",null);
-        this.username = creator.createString("username", null);
-        this.password = creator.createString("password", null);
+        this.db = creator.createString("database","");
+        this.username = creator.createString("username", "");
+        this.password = creator.createString("password", "");
     }
 
     public IntegerConfig getPort() {

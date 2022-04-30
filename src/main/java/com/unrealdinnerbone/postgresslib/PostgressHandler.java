@@ -14,7 +14,7 @@ public class PostgressHandler {
     private final Connection postgres;
 
     public PostgressHandler(PostgresConfig postgresConfig) throws SQLException, ClassNotFoundException {
-        String connectionString = StringUtils.replace("jdbc:postgresql://{0}:{1}/{2}?currentSchema={2}", postgresConfig.getHost(), postgresConfig.getPort(), postgresConfig.getDb());
+        String connectionString = StringUtils.replace("jdbc:postgresql://{0}:{1}/{2}?currentSchema={2}", postgresConfig.getHost().getValue(), postgresConfig.getPort().getValue(), postgresConfig.getDb().getValue());
         Class.forName("org.postgresql.Driver");
         postgres = DriverManager.getConnection(connectionString, postgresConfig.getUsername().getValue(), postgresConfig.getPassword().getValue());
     }
