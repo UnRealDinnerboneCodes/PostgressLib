@@ -19,7 +19,7 @@ public class PostgressHandler {
         postgres = DriverManager.getConnection(connectionString, postgresConfig.getUsername().getValue(), postgresConfig.getPassword().getValue());
     }
 
-    public void executeUpdate(String quarry, ExceptionConsumer<PreparedStatement, SQLException> preparedStatementConsumer) {
+    public void executeUpdate(String quarry, PostgresConsumer preparedStatementConsumer) {
         try {
             PreparedStatement preparedStatement = postgres.prepareStatement(quarry);
             preparedStatementConsumer.accept(preparedStatement);
@@ -29,10 +29,10 @@ public class PostgressHandler {
         }
     }
 
-    public void executeBatchUpdate(String quarry, List<ExceptionConsumer<PreparedStatement, SQLException>> statemetns) {
+    public void executeBatchUpdate(String quarry, List<PostgresConsumer> statemetns) {
         try {
             PreparedStatement preparedStatement = postgres.prepareStatement(quarry);
-            for(ExceptionConsumer<PreparedStatement, SQLException> statemetn : statemetns) {
+            for(PostgresConsumer statemetn : statemetns) {
                 statemetn.accept(preparedStatement);
                 preparedStatement.addBatch();
             }
@@ -46,7 +46,7 @@ public class PostgressHandler {
         return postgres.createStatement().executeQuery(quarry);
     }
 
-    public ResultSet getSet(String quarry, ExceptionConsumer<PreparedStatement, SQLException> preparedStatementConsumer) {
+    public ResultSet getSet(String quarry, PostgresConsumer preparedStatementConsumer) {
         try {
             PreparedStatement preparedStatement = postgres.prepareStatement(quarry);
             preparedStatementConsumer.accept(preparedStatement);
