@@ -14,8 +14,8 @@ configurations {
 
 dependencies {
 
-    api "com.unrealdinnerbone:UnRealConfig:4.0.0+build.36"
-    api "com.unrealdinnerbone:UnRealLib:3.2.0+build.97"
+    api "com.unrealdinnerbone:UnRealConfig:5.0.0+build.44"
+    api "com.unrealdinnerbone:UnRealLib:4.0.0+build.125"
 
     api 'org.postgresql:postgresql:42.5.0'
 
