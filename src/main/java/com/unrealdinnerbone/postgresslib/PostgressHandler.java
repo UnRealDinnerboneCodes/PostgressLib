@@ -1,7 +1,6 @@
 package com.unrealdinnerbone.postgresslib;
 
 import com.unrealdinnerbone.unreallib.StringUtils;
-import com.unrealdinnerbone.unreallib.exception.ExceptionConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,16 +12,14 @@ public class PostgressHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(PostgressHandler.class);
     private final Connection postgres;
 
-    public PostgressHandler(PostgresConfig postgresConfig) throws SQLException, ClassNotFoundException {
+    public PostgressHandler(PostgresConfig postgresConfig) throws SQLException {
         String connectionString = StringUtils.replace("jdbc:postgresql://{0}:{1}/{2}?currentSchema={2}", postgresConfig.getHost().getValue(), postgresConfig.getPort().getValue(), postgresConfig.getDb().getValue());
-        Class.forName("org.postgresql.Driver");
         LOGGER.info("Connecting to postgresql: {}", connectionString);
         postgres = DriverManager.getConnection(connectionString, postgresConfig.getUsername().getValue(), postgresConfig.getPassword().getValue());
     }
 
     public void executeUpdate(String quarry, PostgresConsumer preparedStatementConsumer) {
-        try {
-            PreparedStatement preparedStatement = postgres.prepareStatement(quarry);
+        try(PreparedStatement preparedStatement = postgres.prepareStatement(quarry)) {
             preparedStatementConsumer.accept(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -30,16 +27,17 @@ public class PostgressHandler {
         }
     }
 
-    public void executeBatchUpdate(String quarry, List<PostgresConsumer> statemetns) {
-        try {
-            PreparedStatement preparedStatement = postgres.prepareStatement(quarry);
-            for(PostgresConsumer statemetn : statemetns) {
-                statemetn.accept(preparedStatement);
+    public boolean executeBatchUpdate(String quarry, List<PostgresConsumer> statements) {
+        try(PreparedStatement preparedStatement = postgres.prepareStatement(quarry)) {
+            for(PostgresConsumer statement : statements) {
+                statement.accept(preparedStatement);
                 preparedStatement.addBatch();
             }
             preparedStatement.executeBatch();
-        } catch(SQLException throwables) {
-            LOGGER.error("Error while updating batch", throwables);
+            return true;
+        }catch (SQLException e) {
+            LOGGER.error("Error while updating batch", e);
+            return false;
         }
     }
 
@@ -48,8 +46,7 @@ public class PostgressHandler {
     }
 
     public ResultSet getSet(String quarry, PostgresConsumer preparedStatementConsumer) {
-        try {
-            PreparedStatement preparedStatement = postgres.prepareStatement(quarry);
+        try(PreparedStatement preparedStatement = postgres.prepareStatement(quarry)) {
             preparedStatementConsumer.accept(preparedStatement);
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
