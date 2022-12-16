@@ -46,7 +46,8 @@ public class PostgressHandler {
     }
 
     public ResultSet getSet(String quarry, PostgresConsumer preparedStatementConsumer) {
-        try(PreparedStatement preparedStatement = postgres.prepareStatement(quarry)) {
+        try {
+            PreparedStatement preparedStatement = postgres.prepareStatement(quarry);
             preparedStatementConsumer.accept(preparedStatement);
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
