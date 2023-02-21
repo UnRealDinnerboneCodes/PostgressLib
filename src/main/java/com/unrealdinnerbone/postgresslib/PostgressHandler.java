@@ -14,7 +14,6 @@ public class PostgressHandler {
 
     public PostgressHandler(PostgresConfig postgresConfig) throws SQLException {
         String connectionString = StringUtils.replace("jdbc:postgresql://{0}:{1}/{2}?currentSchema={2}", postgresConfig.getHost().getValue(), postgresConfig.getPort().getValue(), postgresConfig.getDb().getValue());
-        LOGGER.info("Connecting to postgresql: {}", connectionString);
         postgres = DriverManager.getConnection(connectionString, postgresConfig.getUsername().getValue(), postgresConfig.getPassword().getValue());
     }
 
