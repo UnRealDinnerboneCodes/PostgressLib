@@ -6,6 +6,7 @@ plugins {
 
 apply from: 'https://raw.githubusercontent.com/UnRealDinnerbone/GradleHelpers/helpers/base.gradle'
 
+//Todo remove this
 configurations {
     api
     implementation.extendsFrom api
@@ -13,8 +14,8 @@ configurations {
 }
 
 dependencies {
-    api "com.unrealdinnerbone:UnRealConfig:7.0.0+build.46"
-    api "com.unrealdinnerbone:UnRealLib:5.0.0+build.133"
+    api "com.unrealdinnerbone:UnRealConfig:8.0.0+build.47"
+    api "com.unrealdinnerbone:UnRealLib:7.0.0+build.144"
     api 'org.postgresql:postgresql:42.5.4'
 
 }

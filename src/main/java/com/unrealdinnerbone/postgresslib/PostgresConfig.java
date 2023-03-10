@@ -1,8 +1,8 @@
 package com.unrealdinnerbone.postgresslib;
 
-import com.unrealdinnerbone.config.IConfigCreator;
 import com.unrealdinnerbone.config.config.IntegerConfig;
 import com.unrealdinnerbone.config.config.StringConfig;
+import com.unrealdinnerbone.config.ConfigCreator;
 
 public class PostgresConfig {
 
@@ -13,7 +13,7 @@ public class PostgresConfig {
     private final StringConfig password;
 
 
-    public PostgresConfig(IConfigCreator creator) {
+    public PostgresConfig(ConfigCreator creator) {
         this.host = creator.createString("host", "");
         this.port = creator.createInteger("port", 5432);
         this.db = creator.createString("database","");
