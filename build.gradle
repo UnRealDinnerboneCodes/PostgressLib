@@ -7,8 +7,8 @@ plugins {
 apply from: 'https://raw.githubusercontent.com/UnRealDinnerbone/GradleHelpers/helpers/base.gradle'
 
 dependencies {
-    api "com.unrealdinnerbone:UnRealConfig:8.0.0+build.49"
-    api "com.unrealdinnerbone:UnRealLib:7.0.0+build.148"
+    api "com.unrealdinnerbone:UnRealConfig:11.0.0+build.65"
+    api "com.unrealdinnerbone:UnRealLib:7.0.0+build.160"
     api 'org.postgresql:postgresql:42.5.4'
 
 }

@@ -13,8 +13,8 @@ public class PostgressHandler {
     private final Connection postgres;
 
     public PostgressHandler(PostgresConfig postgresConfig) throws SQLException {
-        String connectionString = StringUtils.replace("jdbc:postgresql://{0}:{1}/{2}?currentSchema={2}", postgresConfig.getHost().getValue(), postgresConfig.getPort().getValue(), postgresConfig.getDb().getValue());
-        postgres = DriverManager.getConnection(connectionString, postgresConfig.getUsername().getValue(), postgresConfig.getPassword().getValue());
+        String connectionString = StringUtils.replace("jdbc:postgresql://{0}:{1}/{2}?currentSchema={2}", postgresConfig.getHost().getDefaultValue(), postgresConfig.getPort().getDefaultValue(), postgresConfig.getDb().getDefaultValue());
+        postgres = DriverManager.getConnection(connectionString, postgresConfig.getUsername().getDefaultValue(), postgresConfig.getPassword().getDefaultValue());
     }
 
     public void executeUpdate(String quarry, PostgresConsumer preparedStatementConsumer) {
