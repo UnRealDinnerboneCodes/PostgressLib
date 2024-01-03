@@ -1,16 +1,15 @@
 package com.unrealdinnerbone.postgresslib;
 
-import com.unrealdinnerbone.config.config.IntegerConfig;
-import com.unrealdinnerbone.config.config.StringConfig;
-import com.unrealdinnerbone.config.ConfigCreator;
+import com.unrealdinnerbone.config.config.ConfigValue;
+import com.unrealdinnerbone.config.api.ConfigCreator;
 
 public class PostgresConfig {
 
-    private final StringConfig host;
-    private final IntegerConfig port;
-    private final StringConfig db;
-    private final StringConfig username;
-    private final StringConfig password;
+    private final ConfigValue<String> host;
+    private final ConfigValue<Integer> port;
+    private final ConfigValue<String> db;
+    private final ConfigValue<String> username;
+    private final ConfigValue<String> password;
 
 
     public PostgresConfig(ConfigCreator creator) {
@@ -21,23 +20,23 @@ public class PostgresConfig {
         this.password = creator.createString("password", "");
     }
 
-    public IntegerConfig getPort() {
+    public ConfigValue<Integer> getPort() {
         return port;
     }
 
-    public StringConfig getDb() {
+    public ConfigValue<String> getDb() {
         return db;
     }
 
-    public StringConfig getHost() {
+    public ConfigValue<String> getHost() {
         return host;
     }
 
-    public StringConfig getPassword() {
+    public ConfigValue<String> getPassword() {
         return password;
     }
 
-    public StringConfig getUsername() {
+    public ConfigValue<String> getUsername() {
         return username;
     }
 }
