@@ -8,11 +8,17 @@ import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class PostgresHandler {
+public class PostgresHandler implements IPostgresHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PostgresHandler.class);
     protected final Connection postgres;
 
+
+    public IPostgresHandler createHandler(PostgresConfig config) throws SQLException {
+        return new PostgresHandler(config);
+    }
+
+    @Deprecated
     public PostgresHandler(PostgresConfig postgresConfig) throws SQLException {
         String connectionString = StringUtils.replace("jdbc:postgresql://{0}:{1}/{2}?currentSchema={2}", postgresConfig.getHost().get(), postgresConfig.getPort().get(), postgresConfig.getDb().get());
         postgres = DriverManager.getConnection(connectionString, postgresConfig.getUsername().get(), postgresConfig.getPassword().get());
